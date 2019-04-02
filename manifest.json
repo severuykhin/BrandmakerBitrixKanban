@@ -15,16 +15,17 @@
     },
     "background": {
         "scripts": ["eventPage.js"],
-        "persistent": false
+        "persistent": true
     },
     "content_scripts": [
         {
-            "matches": ["https://brandmaker.bitrix24.ru/company/personal/user/532/tasks/?F_STATE=sV180"],
+            "matches": ["https://brandmaker.bitrix24.ru/company/personal/user/*"],
             "js": ["content.js"]
         }
     ],
     "permissions": [
         "tabs",
-        "https://brandmaker.bitrix24.ru/company/personal/user/532/tasks/?F_STATE=sV180"
+        "webRequest",
+        "*://brandmaker.bitrix24.ru/*"
     ]
 }
