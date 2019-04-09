@@ -36,7 +36,7 @@ const Kanban = (function() {
 
         setInterval(function() {
             update();
-        }, 20000);
+        }, 10000);
     }
 
     /**
