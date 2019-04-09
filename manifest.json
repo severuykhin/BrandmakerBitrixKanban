@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "BrandmakerBitrixKanban extension",
-    "version": "1.0",
+    "version": "0.1",
     "description": "Applies some new stuff to Bitrix Kanban workflow",
     "icons": {
         "128": "icon128.png",
@@ -17,15 +17,13 @@
         "scripts": ["eventPage.js"],
         "persistent": true
     },
-    "content_scripts": [
-        {
-            "matches": ["https://brandmaker.bitrix24.ru/company/personal/user/*"],
-            "js": ["content.js"]
-        }
-    ],
+    "content_scripts": [{
+        "matches": ["https://brandmaker.bitrix24.ru/*"],
+        "js": ["content.js"]
+    }],
     "permissions": [
         "tabs",
-        "webRequest",
+        "activeTab",
         "*://brandmaker.bitrix24.ru/*"
     ]
 }

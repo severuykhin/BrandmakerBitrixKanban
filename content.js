@@ -4,19 +4,19 @@ const message = {
 
 chrome.runtime.sendMessage(message);
 
-const Kanban = (function () {
+const Kanban = (function() {
 
     const DOM_map = {
         columns: null
     };
 
-    const setDomMap = function (columns) {
-        
+    const setDomMap = function(columns) {
+
         DOM_map.columns = [];
 
         Array.prototype.slice.apply(columns, null).forEach(element => {
 
-            let cards = element.querySelectorAll('.tasks-kanban-item'), 
+            let cards = element.querySelectorAll('.tasks-kanban-item'),
                 title = element.querySelector('.main-kanban-column-total-item');
 
             let column_map = {
@@ -31,10 +31,10 @@ const Kanban = (function () {
 
     }
 
-    const initModule = function () {
+    const initModule = function() {
         update();
 
-        setInterval(function () {
+        setInterval(function() {
             update();
         }, 20000);
     }
@@ -65,7 +65,7 @@ const Kanban = (function () {
         return `${hString}:${mString}`;
     }
 
-    const countColumnTime = function (columnCards) {
+    const countColumnTime = function(columnCards) {
 
         let allottedHours = 0,
             allottedMinutes = 0,
@@ -92,26 +92,26 @@ const Kanban = (function () {
                 allottedHours += parseInt(allottedTime[0], 10);
                 allottedMinutes += parseInt(allottedTime[1], 10);
             }
-                
+
         });
 
         return {
             spentTime: convertTime({ hours: spentHours, minutes: spentMinutes }),
-            allottedTime: convertTime({hours: allottedHours, minutes: allottedMinutes})
+            allottedTime: convertTime({ hours: allottedHours, minutes: allottedMinutes })
         };
     }
 
-    const updateColumnsTime = function () {
+    const updateColumnsTime = function() {
         DOM_map.columns.forEach((column) => {
             if (column.cards.length <= 0) return false;
             column.time = countColumnTime(column.cards);
-            
-            let text = `${column.title.textContent.split(' - ')[0]} - ${column.time.spentTime} - ${column.time.allottedTime}`;
+
+            let text = `${column.title.textContent.split(' - ')[0]} - ${column.time.spentTime}/${column.time.allottedTime}`;
             column.title.textContent = text;
         });
     }
 
-    const update = function () {
+    const update = function() {
         let columns = document.querySelectorAll('.main-kanban-column');
 
         if (columns.length <= 0) return false;
@@ -124,6 +124,6 @@ const Kanban = (function () {
     };
 })();
 
-setTimeout(function () {
+setTimeout(function() {
     Kanban.initModule();
 }, 3000);
